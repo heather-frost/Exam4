@@ -49,7 +49,7 @@ public class DiceGame {
                         " on a " + player.getDie().getNumSides() +
                         "-sided die!\n");
             } catch (IOException e) {
-                System.out.println(e.getMessage());
+                System.out.println(player.getName() + "'s roll could not be written");
             }
         }
 
@@ -65,7 +65,7 @@ public class DiceGame {
                 fileWriter.write(players.get(winner).getName() + " won the game!");
                 System.out.println("Your game has printed to DiceGameOutput.txt.");
             } catch (IOException e) {
-                System.out.println(e.getMessage());
+                System.out.println("The winner could not be written.");
             }
         } else { //Tie game
             int highRoll = 0;
@@ -91,9 +91,9 @@ public class DiceGame {
                 }
                 System.out.println("Your game has printed to DiceGameOutput.txt.");
             } catch (IOException e) {
-                System.out.println(e.getMessage());
+                System.out.println("There was a tie but it threw an error in writing.");
             }
-            
+
         }
     }
 
