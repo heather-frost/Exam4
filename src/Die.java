@@ -4,18 +4,18 @@ public class Die {
     private int numSides;
     private int value;
 
-    public Die () {
+    public Die() {
         this.numSides = 6;
         this.value = 1;
     }
 
-    public Die (int numSides) {
+    public Die(int numSides) {
         this.numSides = numSides;
         this.value = 1;
     }
 
     public void roll() {
-        this.value = ThreadLocalRandom.current().nextInt(1, this.numSides+1);
+        this.value = ThreadLocalRandom.current().nextInt(1, this.numSides + 1);
     }
 
     public int getNumSides() {
