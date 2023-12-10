@@ -1,3 +1,5 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -25,30 +27,73 @@ public class DiceGame {
         System.out.println("Wonderful! Let's play!");
         System.out.println();
 
+        try (FileWriter fileWriter = new FileWriter("DiceGameOutput.txt")) {
+            fileWriter.write("");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
         for (Player player : players) {
             player.getDie().roll();
-            System.out.println("Player " + player.getName() +
-                    " rolled a " + player.getDie().getValue() +
-                    " on a " + player.getDie().getNumSides() +
-                    "-sided die!");
+
+////          Print to screen version
+//            System.out.println("Player " + player.getName() +
+//                    " rolled a " + player.getDie().getValue() +
+//                    " on a " + player.getDie().getNumSides() +
+//                    "-sided die!");
+
+//            file output version
+            try (FileWriter fileWriter = new FileWriter("DiceGameOutput.txt", true)) {
+                fileWriter.write("Player " + player.getName() +
+                        " rolled a " + player.getDie().getValue() +
+                        " on a " + player.getDie().getNumSides() +
+                        "-sided die!\n");
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
         }
 
         int winner = decideWinner(players);
 
         if (winner > -1) {
-            System.out.println(players.get(winner).getName() + " won the game!");
+
+////          Print to screen version
+//            System.out.println(players.get(winner).getName() + " won the game!");
+
+//            file output version
+            try (FileWriter fileWriter = new FileWriter("DiceGameOutput.txt", true)) {
+                fileWriter.write(players.get(winner).getName() + " won the game!");
+                System.out.println("Your game has printed to DiceGameOutput.txt.");
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
         } else { //Tie game
             int highRoll = 0;
             for (Player player : players) {
                 highRoll = Math.max(highRoll, player.getDie().getValue());
             }
 
-            System.out.println("It was a tie! These players all rolled a " + highRoll + ":");
-            for (Player player : players) {
-                if (highRoll == player.getDie().getValue()) {
-                    System.out.println(player.getName());
+////          Print to screen version
+//            System.out.println("It was a tie! These players all rolled a " + highRoll + ":");
+//            for (Player player : players) {
+//                if (highRoll == player.getDie().getValue()) {
+//                    System.out.println(player.getName());
+//                }
+//            }
+
+//            file output version
+            try (FileWriter fileWriter = new FileWriter("DiceGameOutput.txt", true)) {
+                fileWriter.write("It was a tie! These players all rolled a " + highRoll + ":\n");
+                for (Player player : players) {
+                    if (highRoll == player.getDie().getValue()) {
+                        fileWriter.write(player.getName() + "\n");
+                    }
                 }
+                System.out.println("Your game has printed to DiceGameOutput.txt.");
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
             }
+            
         }
     }
 
