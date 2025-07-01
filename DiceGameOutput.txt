@@ -1,4 +1,2 @@
-Player Alice rolled a 6 on a 6-sided die!
-Player Barb rolled a 3 on a 6-sided die!
-Player Charlie rolled a 5 on a 6-sided die!
-Alice won the game!
+Player bob rolled a 2 on a 2-sided die!
+bob won the game!
